@@ -31,4 +31,11 @@ public class Warehouse
         currentWeight += item.WeightKg;
         return (true, "Item added successfully.");
     }
+    public void ListAll()
+    {
+        foreach (var item in items)
+        {
+            Console.WriteLine(item.Describe());
+        }
+    }
 }
