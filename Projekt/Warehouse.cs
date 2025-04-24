@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class Item
+public class Warehouse
 {
-	public Item()
+	public Warehouse()
 	{
 	}
 }
