@@ -10,9 +10,25 @@ public class Warehouse
 
     public int CurrentItemCount => items.Count;
 
-    public Warehouse(int capacity, double maxTotalWeight);
+    public Warehouse(int capacity, double maxTotalWeight)
+    {
+        this.capacity = capacity;
+        this.maxTotalWeight = Math.Round(maxTotalWeight, 3);
+    }
+    public (bool success, string message) AddItem(Item item)
+    {
+        if (items.Count >= capacity)
+        {
+            return (false, "Cannot add item: warehouse is full.");
+        }
 
-    public Warehouse()
-	{
-	}
+        if (currentWeight + item.WeightKg > maxTotalWeight)
+        {
+            return (false, "Cannot add item: weight limit exceeded.");
+        }
+
+        items.Add(item);
+        currentWeight += item.WeightKg;
+        return (true, "Item added successfully.");
+    }
 }

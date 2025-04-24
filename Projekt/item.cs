@@ -3,10 +3,10 @@
 public class Item
 {
     public string Name { get; }
-    public decimal WeightKg { get; }
+    public double WeightKg { get; }
     public int WeirdnessLevel { get; }
     public bool IsFragile { get; }
-    public Item(string name, decimal weightKg, int weirdnessLevel, bool isFragile)
+    public Item(string name, double weightKg, int weirdnessLevel, bool isFragile)
 	{
         Name = name;
         WeightKg = Math.Round(weightKg, 3);
