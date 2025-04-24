@@ -6,36 +6,36 @@ namespace Projekt
     {
         static void Main()
         {
-            Console.Write("Enter warehouse capacity: ");
+            Console.Write("Podaj pojemność magazynu: ");
             int capacity = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter max total weight (kg): ");
+            Console.Write("Podaj maksymalną łączną wagę kg: ");
             double maxWeight = double.Parse(Console.ReadLine());
 
             Warehouse warehouse = new Warehouse(capacity, maxWeight);
 
             while (true)
             {
-                Console.WriteLine("\nOptions:");
-                Console.WriteLine("1 - Add item");
-                Console.WriteLine("2 - List all items");
-                Console.WriteLine("3 - Exit");
-                Console.Write("Choose: ");
+                Console.WriteLine("\nOpcje:");
+                Console.WriteLine("1 - Dodaj przedmiot");
+                Console.WriteLine("2 - Podaj listę przedmiotów");
+                Console.WriteLine("3 - Wyjdź");
+                Console.Write("Wybierz: ");
                 string choice = Console.ReadLine();
 
                 if (choice == "1")
                 {
-                    Console.Write("Item name: ");
+                    Console.Write("Nazwa przedmiotu: ");
                     string name = Console.ReadLine();
 
-                    Console.Write("Weight (kg): ");
+                    Console.Write("Waga kg: ");
                     double weight = double.Parse(Console.ReadLine());
 
-                    Console.Write("Weirdness level (1-10): ");
+                    Console.Write("Poziom dziwności 1-10: ");
                     int weirdness = int.Parse(Console.ReadLine());
 
-                    Console.Write("Is it fragile? (yes/no): ");
-                    bool isFragile = Console.ReadLine().ToLower() == "yes";
+                    Console.Write("Czy przedmiot jest delikatny? (tak/nie): ");
+                    bool isFragile = Console.ReadLine().ToLower() == "tak";
 
                     Item item = new Item(name, weight, weirdness, isFragile);
                     var (success, message) = warehouse.AddItem(item);
@@ -47,12 +47,12 @@ namespace Projekt
                 }
                 else if (choice == "3")
                 {
-                    Console.WriteLine("Exiting...");
+                    Console.WriteLine("Wychodzenie.");
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid option.");
+                    Console.WriteLine("Nie ma takiej opcji.");
                 }
             }
         }

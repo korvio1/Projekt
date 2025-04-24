@@ -20,21 +20,30 @@ namespace Projekt
 
         public (bool, string) AddItem(Item item)
         {
-            if (currentItemCount >= capacity)
-                return (false, "Warehouse is full.");
+            double projectedWeight = Math.Round(currentWeight + item.WeightKg, 3);
 
-            if (currentWeight + item.WeightKg > maxTotalWeight)
-                return (false, "Adding this item would exceed weight limit.");
+            if (currentItemCount >= capacity)
+                return (false, "Magazyn jest pełny.");
+
+            if (projectedWeight > maxTotalWeight)
+                return (false, $"Przekroczono maksymalną wagę magazynu. Aktualna waga: {currentWeight} kg, po dodaniu: {projectedWeight} kg (limit: {maxTotalWeight} kg).");
 
             items.Add(item);
             currentItemCount++;
-            currentWeight += item.WeightKg;
+            currentWeight = projectedWeight;
 
-            return (true, "Item added successfully.");
+            return (true, "Przedmiot dodany.");
         }
 
         public void ListAll()
         {
+            if (items.Count == 0)
+            {
+                Console.WriteLine("Magazyn jest pusty.");
+                return;
+            }
+
+            Console.WriteLine("\nLista przedmiotów:");
             foreach (var item in items)
             {
                 Console.WriteLine(item.Description());
