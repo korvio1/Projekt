@@ -41,6 +41,19 @@ namespace Projekt
                     var (success, message) = warehouse.AddItem(item);
                     Console.WriteLine(message);
                 }
+                else if (choice == "2")
+                {
+                    warehouse.ListAll();
+                }
+                else if (choice == "3")
+                {
+                    Console.WriteLine("Exiting...");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option.");
+                }
             }
         }
     }
