@@ -13,4 +13,8 @@ public class Item
         WeirdnessLevel = weirdnessLevel;
         IsFragile = isFragile;
     }
+    public string Describe()
+    {
+        return $"{{\n\t\"nazwa\": \"{Name}\",\n\t\"waga_kg\": {WeightKg},\n\t\"poziom_dziwnosci\": {WeirdnessLevel},\n\t\"czy_delikatny\": {(IsFragile ? "TAK" : "NIE")}\n}}";
+    }
 }
