@@ -1,41 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Warehouse
+namespace Projekt
 {
-    private readonly int capacity;
-    private readonly double maxTotalWeight;
-    private readonly List<Item> items = new List<Item>();
-    private double currentWeight = 0;
-
-    public int CurrentItemCount => items.Count;
-
-    public Warehouse(int capacity, double maxTotalWeight)
+    class Warehouse
     {
-        this.capacity = capacity;
-        this.maxTotalWeight = Math.Round(maxTotalWeight, 3);
-    }
-    public (bool success, string message) AddItem(Item item)
-    {
-        if (items.Count >= capacity)
+        private readonly int capacity;
+        private int currentItemCount = 0;
+        private readonly double maxTotalWeight;
+        private double currentWeight = 0;
+
+        private List<Item> items = new List<Item>();
+
+        public Warehouse(int capacity, double maxTotalWeight)
         {
-            return (false, "Cannot add item: warehouse is full.");
+            this.capacity = capacity;
+            this.maxTotalWeight = Math.Round(maxTotalWeight, 3);
         }
 
-        if (currentWeight + item.WeightKg > maxTotalWeight)
+        public (bool, string) AddItem(Item item)
         {
-            return (false, "Cannot add item: weight limit exceeded.");
+            if (currentItemCount >= capacity)
+                return (false, "Warehouse is full.");
+
+            if (currentWeight + item.WeightKg > maxTotalWeight)
+                return (false, "Adding this item would exceed weight limit.");
+
+            items.Add(item);
+            currentItemCount++;
+            currentWeight += item.WeightKg;
+
+            return (true, "Item added successfully.");
         }
 
-        items.Add(item);
-        currentWeight += item.WeightKg;
-        return (true, "Item added successfully.");
-    }
-    public void ListAll()
-    {
-        foreach (var item in items)
+        public void ListAll()
         {
-            Console.WriteLine(item.Describe());
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Description());
+            }
         }
     }
 }
